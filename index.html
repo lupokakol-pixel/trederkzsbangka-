@@ -1,89 +1,78 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://accounts.google.com https://apis.google.com https://fonts.googleapis.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://accounts.google.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; connect-src 'self' https://accounts.google.com;" />
   <meta name="referrer" content="no-referrer" />
   <title>KZS Trading Bangka — Pendaftaran Anggota</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Syne:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
   <style>
     :root {
-      --gold: #c9a84c;
-      --gold-light: #e8c97a;
-      --gold-dark: #8b6914;
-      --black: #0a0a0b;
-      --dark: #111115;
-      --dark2: #1a1a21;
-      --dark3: #22222c;
-      --border: rgba(201,168,76,0.2);
-      --border-hover: rgba(201,168,76,0.5);
-      --text: #e8e4d8;
-      --muted: #8a8578;
-      --error: #e05252;
-      --success: #52c97a;
+      --gold: #c9a84c; --gold-dark: #8b6914; --black: #0a0a0b;
+      --dark2: #1a1a21; --dark3: #22222c;
+      --border: rgba(201,168,76,0.2); --border-hover: rgba(201,168,76,0.5);
+      --text: #e8e4d8; --muted: #8a8578; --error: #e05252; --success: #52c97a;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Syne', sans-serif;
-      background: var(--black);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.6;
-    }
-    .bg-glow { position: fixed; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%); pointer-events: none; z-index: 0; }
-    .bg-glow-1 { top: -200px; left: -200px; }
+    body { font-family: 'Syne', sans-serif; background: var(--black); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.6; }
+    .bg-glow { position: fixed; width: 600px; height: 600px; border-radius: 50%; pointer-events: none; z-index: 0; }
+    .bg-glow-1 { top: -200px; left: -200px; background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%); }
     .bg-glow-2 { bottom: -200px; right: -200px; background: radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 70%); }
+
+    /* HERO */
     .hero { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 24px; text-align: center; }
-    .logo-ring { position: relative; width: 110px; height: 110px; margin-bottom: 36px; animation: float 4s ease-in-out infinite; }
-    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .logo-ring { width: 110px; height: 110px; margin-bottom: 36px; animation: float 4s ease-in-out infinite; }
     .logo-ring svg { width: 100%; height: 100%; filter: drop-shadow(0 0 20px rgba(201,168,76,0.5)); }
+    @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
     .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(201,168,76,0.08); border: 1px solid var(--border); border-radius: 100px; padding: 6px 16px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; animation: fadeUp 0.6s ease both; }
     .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 1.5s ease-in-out infinite; }
     @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
-    h1 { font-family: 'Playfair Display', serif; font-size: clamp(42px, 8vw, 88px); font-weight: 900; line-height: 1; letter-spacing: -2px; margin-bottom: 12px; animation: fadeUp 0.7s ease 0.1s both; }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(42px,8vw,88px); font-weight: 900; line-height: 1; letter-spacing: -2px; margin-bottom: 12px; animation: fadeUp 0.7s ease 0.1s both; }
     h1 span { color: var(--gold); }
     .sub-title { font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); margin-bottom: 40px; animation: fadeUp 0.7s ease 0.2s both; }
     .hero-desc { max-width: 480px; font-size: 15px; line-height: 1.8; color: var(--muted); margin-bottom: 48px; animation: fadeUp 0.7s ease 0.3s both; }
-    .cta-btn { display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 1px; padding: 16px 36px; border-radius: 4px; cursor: pointer; border: none; transition: all 0.3s ease; text-transform: uppercase; animation: fadeUp 0.7s ease 0.4s both; position: relative; overflow: hidden; }
-    .cta-btn::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.1); transform: translateX(-100%); transition: transform 0.4s ease; }
-    .cta-btn:hover::after { transform: translateX(0); }
+    .cta-btn { display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--black); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 1px; padding: 16px 36px; border-radius: 4px; cursor: pointer; border: none; transition: all 0.3s; text-transform: uppercase; animation: fadeUp 0.7s ease 0.4s both; position: relative; overflow: hidden; }
     .cta-btn:hover { box-shadow: 0 0 40px rgba(201,168,76,0.4); transform: translateY(-2px); }
-    .stats { display: flex; gap: 48px; justify-content: center; margin-top: 72px; padding-top: 40px; border-top: 1px solid var(--border); animation: fadeUp 0.7s ease 0.5s both; }
+    .stats { display: flex; gap: 48px; justify-content: center; margin-top: 72px; padding-top: 40px; border-top: 1px solid var(--border); animation: fadeUp 0.7s ease 0.5s both; flex-wrap: wrap; }
     .stat-item { text-align: center; }
     .stat-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--gold); }
     .stat-label { font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
-    .section-divider { display: flex; align-items: center; gap: 16px; padding: 0 24px; max-width: 700px; margin: 0 auto 48px; }
+
+    /* FEATURES */
+    .features { position: relative; z-index: 1; padding: 80px 24px; max-width: 1000px; margin: 0 auto; }
+    .section-divider { display: flex; align-items: center; gap: 16px; max-width: 700px; margin: 0 auto 48px; }
     .divider-line { flex: 1; height: 1px; background: var(--border); }
     .divider-text { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+    .feat-card { background: var(--dark2); border: 1px solid var(--border); border-radius: 12px; padding: 28px 24px; transition: all 0.3s; }
+    .feat-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
+    .feat-icon { width: 44px; height: 44px; background: rgba(201,168,76,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--gold); }
+    .feat-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .feat-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* FORM */
     #register { position: relative; z-index: 1; padding: 80px 24px 120px; }
     .section-header { text-align: center; margin-bottom: 56px; }
-    .section-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 5vw, 48px); font-weight: 700; margin-bottom: 12px; }
+    .section-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px,5vw,48px); font-weight: 700; margin-bottom: 12px; }
     .section-header p { color: var(--muted); font-size: 14px; }
     .form-card { max-width: 520px; margin: 0 auto; background: var(--dark2); border: 1px solid var(--border); border-radius: 16px; padding: 48px 40px; position: relative; overflow: hidden; }
     .form-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-    .google-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; background: var(--dark3); border: 1px solid var(--border); border-radius: 10px; padding: 14px 20px; cursor: pointer; transition: all 0.3s ease; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 28px; }
-    .google-btn:hover { border-color: var(--border-hover); background: rgba(201,168,76,0.06); box-shadow: 0 0 20px rgba(201,168,76,0.1); }
+
+    .google-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; background: var(--dark3); border: 1px solid var(--border); border-radius: 10px; padding: 14px 20px; cursor: pointer; transition: all 0.3s; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 28px; }
+    .google-btn:hover { border-color: var(--border-hover); background: rgba(201,168,76,0.06); }
     .google-btn.connected { border-color: var(--success); color: var(--success); cursor: default; }
     .google-icon { width: 20px; height: 20px; flex-shrink: 0; }
+
     .or-sep { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
     .or-sep span { font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
     .or-line { flex: 1; height: 1px; background: var(--border); }
+
     .field-group { margin-bottom: 20px; }
     label { display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-    input { width: 100%; background: var(--dark3); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; font-family: 'Syne', sans-serif; font-size: 14px; color: var(--text); transition: all 0.3s ease; outline: none; }
+    input { width: 100%; background: var(--dark3); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; font-family: 'Syne', sans-serif; font-size: 14px; color: var(--text); transition: all 0.3s; outline: none; }
     input::placeholder { color: var(--muted); }
     input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.1); }
     input.valid { border-color: var(--success); }
@@ -91,15 +80,25 @@
     .field-hint { font-size: 11px; color: var(--muted); margin-top: 6px; }
     .field-error { font-size: 11px; color: var(--error); margin-top: 6px; display: none; }
     .field-error.show { display: block; }
+
     .phone-wrap { display: flex; gap: 10px; }
     .prefix-box { background: var(--dark3); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; font-family: 'DM Mono', monospace; font-size: 14px; color: var(--gold); white-space: nowrap; }
     .phone-wrap input { flex: 1; }
+
     .security-info { display: flex; align-items: center; gap: 10px; background: rgba(82,201,122,0.06); border: 1px solid rgba(82,201,122,0.2); border-radius: 8px; padding: 12px 16px; margin: 24px 0; }
     .security-info svg { flex-shrink: 0; color: var(--success); }
     .security-info span { font-size: 12px; color: #7ad4a0; line-height: 1.5; }
-    .submit-btn { width: 100%; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--black); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; padding: 16px; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; }
+
+    /* WA NOTICE */
+    .wa-notice { display: flex; align-items: center; gap: 10px; background: rgba(37,211,102,0.07); border: 1px solid rgba(37,211,102,0.25); border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; }
+    .wa-notice svg { flex-shrink: 0; }
+    .wa-notice span { font-size: 12px; color: #6ee09a; line-height: 1.5; }
+
+    .submit-btn { width: 100%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--black); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; padding: 16px; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s; }
     .submit-btn:hover:not(:disabled) { box-shadow: 0 0 30px rgba(201,168,76,0.4); transform: translateY(-1px); }
     .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* SUCCESS */
     .success-panel { display: none; text-align: center; padding: 20px 0; }
     .success-panel.show { display: block; }
     .success-icon { width: 72px; height: 72px; background: rgba(82,201,122,0.1); border: 2px solid var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; animation: popIn 0.4s ease; }
@@ -107,29 +106,32 @@
     .success-panel h3 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--success); margin-bottom: 12px; }
     .success-panel p { font-size: 13px; color: var(--muted); line-height: 1.7; }
     .member-id { display: inline-block; margin-top: 20px; padding: 10px 24px; background: var(--dark3); border: 1px solid var(--border); border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 15px; color: var(--gold); letter-spacing: 3px; }
-    .features { position: relative; z-index: 1; padding: 80px 24px; max-width: 1000px; margin: 0 auto; }
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
-    .feat-card { background: var(--dark2); border: 1px solid var(--border); border-radius: 12px; padding: 28px 24px; transition: all 0.3s ease; position: relative; overflow: hidden; }
-    .feat-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
-    .feat-icon { width: 44px; height: 44px; background: rgba(201,168,76,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--gold); }
-    .feat-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
-    .feat-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* WA BUTTON */
+    .wa-open-btn { display: inline-flex; align-items: center; gap: 10px; margin-top: 24px; background: #25D366; color: #fff; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer; transition: all 0.3s; text-decoration: none; }
+    .wa-open-btn:hover { background: #1ebe5a; box-shadow: 0 0 20px rgba(37,211,102,0.4); transform: translateY(-1px); }
+
+    /* FOOTER */
     footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-size: 12px; color: var(--muted); }
     footer strong { color: var(--gold); }
+
+    /* TOAST */
     .toast { position: fixed; bottom: 32px; right: 32px; background: var(--dark2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 20px; font-size: 13px; color: var(--text); z-index: 9999; transform: translateY(100px); opacity: 0; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); max-width: 320px; }
     .toast.show { transform: translateY(0); opacity: 1; }
     .toast.error { border-color: rgba(224,82,82,0.5); }
     .toast.success { border-color: rgba(82,201,122,0.5); }
+
+    /* MODAL */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 24px; }
     .modal-overlay.open { display: flex; }
     .modal-box { background: var(--dark2); border: 1px solid var(--border); border-radius: 16px; padding: 40px; max-width: 400px; width: 100%; text-align: center; animation: modalIn 0.35s cubic-bezier(0.34,1.56,0.64,1); }
     @keyframes modalIn { from{transform:scale(0.85);opacity:0;} to{transform:scale(1);opacity:1;} }
     .modal-box h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 12px; }
     .modal-box p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
-    .modal-btn { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--black); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; padding: 12px 28px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s; }
-    .modal-btn:hover { box-shadow: 0 0 20px rgba(201,168,76,0.4); }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-    @media (max-width: 600px) { .form-card { padding: 32px 24px; } .stats { gap: 24px; flex-wrap: wrap; } }
+    .modal-btn { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--black); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; padding: 12px 28px; border: none; border-radius: 8px; cursor: pointer; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
+    @media (max-width: 600px) { .form-card { padding: 32px 20px; } .stats { gap: 24px; } }
   </style>
 </head>
 <body>
@@ -137,6 +139,7 @@
 <div class="bg-glow bg-glow-1"></div>
 <div class="bg-glow bg-glow-2"></div>
 
+<!-- HERO -->
 <section class="hero">
   <div class="logo-ring">
     <svg viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -154,7 +157,7 @@
   <h1>Trading<br/><span>KZS</span></h1>
   <div class="sub-title">Bangka Trading Community</div>
   <p class="hero-desc">Komunitas trading profesional berbasis di Kepulauan Bangka. Bergabung dan dapatkan akses ke analisis pasar, signal trading, serta jaringan trader berpengalaman.</p>
-  <button class="cta-btn" onclick="scrollToRegister()">
+  <button class="cta-btn" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">
     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     Daftar Sekarang
   </button>
@@ -165,6 +168,7 @@
   </div>
 </section>
 
+<!-- FEATURES -->
 <section class="features">
   <div class="section-divider"><div class="divider-line"></div><div class="divider-text">Keunggulan</div><div class="divider-line"></div></div>
   <div class="features-grid">
@@ -191,14 +195,18 @@
   </div>
 </section>
 
+<!-- FORM -->
 <section id="register">
   <div class="section-header">
     <div class="badge" style="display:inline-flex;margin-bottom:16px;"><span class="badge-dot"></span>Pendaftaran Anggota</div>
     <h2>Bergabung dengan <span style="color:var(--gold)">KZS</span></h2>
     <p>Isi formulir di bawah untuk mendaftar sebagai anggota resmi</p>
   </div>
-  <div class="form-card" id="formCard">
+
+  <div class="form-card">
     <div id="formState">
+
+      <!-- Google Btn -->
       <button class="google-btn" id="googleBtn" onclick="connectGoogle()" type="button">
         <svg class="google-icon" viewBox="0 0 24 24">
           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -208,43 +216,65 @@
         </svg>
         <span id="googleBtnText">Masuk dengan Google</span>
       </button>
-      <div id="emailDisplay" style="display:none; margin-bottom:20px;">
+
+      <div id="emailDisplay" style="display:none;margin-bottom:20px;">
         <label>Akun Google Terhubung</label>
         <input type="text" id="emailField" readonly style="color:var(--gold);cursor:default;" />
       </div>
+
       <div class="or-sep"><div class="or-line"></div><span>Lengkapi Data</span><div class="or-line"></div></div>
+
       <div class="field-group">
         <label for="nickname">Nama Panggilan</label>
-        <input type="text" id="nickname" placeholder="Contoh: Budi, Sari, Agus..." maxlength="30" autocomplete="nickname" oninput="validateNickname(this)" />
+        <input type="text" id="nickname" placeholder="Contoh: Budi, Sari, Agus..." maxlength="30" oninput="validateNickname(this)" />
         <div class="field-hint">Nama yang akan ditampilkan di komunitas</div>
         <div class="field-error" id="nicknameErr">Nama panggilan wajib diisi (min. 2 karakter)</div>
       </div>
+
       <div class="field-group">
         <label for="phone">Nomor HP</label>
         <div class="phone-wrap">
           <div class="prefix-box">+62</div>
-          <input type="tel" id="phone" placeholder="81234567890" maxlength="13" autocomplete="tel" oninput="validatePhone(this)" />
+          <input type="tel" id="phone" placeholder="81234567890" maxlength="13" oninput="validatePhone(this)" />
         </div>
-        <div class="field-hint">Nomor aktif WhatsApp / Telegram (tanpa angka 0 di depan)</div>
+        <div class="field-hint">Nomor aktif WhatsApp (tanpa angka 0 di depan)</div>
         <div class="field-error" id="phoneErr">Format nomor tidak valid</div>
       </div>
+
+      <!-- WA Notice -->
+      <div class="wa-notice">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.112 1.523 5.84L.057 23.887a.5.5 0 0 0 .611.611l6.047-1.466A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 0 1-5.003-1.375l-.358-.213-3.724.903.92-3.635-.233-.374A9.797 9.797 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        <span>Setelah daftar, WhatsApp admin KZS akan terbuka otomatis untuk konfirmasi keanggotaan kamu.</span>
+      </div>
+
       <div class="security-info">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         <span>Data kamu dilindungi enkripsi end-to-end. Kami tidak menjual atau membagikan data pribadi ke pihak ketiga.</span>
       </div>
-      <button class="submit-btn" id="submitBtn" onclick="handleSubmit()" type="button">Daftarkan Saya</button>
+
+      <button class="submit-btn" id="submitBtn" onclick="handleSubmit()" type="button">
+        Daftarkan Saya
+      </button>
+
       <p style="text-align:center;font-size:11px;color:var(--muted);margin-top:16px;">
         Dengan mendaftar, kamu menyetujui <span style="color:var(--gold);cursor:pointer;" onclick="showTerms()">Syarat & Ketentuan</span> KZS Trading Bangka.
       </p>
     </div>
+
+    <!-- SUCCESS -->
     <div class="success-panel" id="successPanel">
       <div class="success-icon">
         <svg width="32" height="32" fill="none" stroke="#52c97a" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <h3>Selamat Datang! 🎉</h3>
-      <p>Pendaftaranmu berhasil! Tim KZS Bangka akan menghubungimu dalam <strong style="color:var(--text)">1x24 jam</strong> melalui WhatsApp untuk verifikasi dan akses komunitas.</p>
+      <h3>Pendaftaran Berhasil! 🎉</h3>
+      <p>Halo <strong id="successName" style="color:var(--text)"></strong>! Data kamu sudah kami terima.<br/>Klik tombol di bawah untuk konfirmasi via WhatsApp ke admin KZS.</p>
       <div class="member-id" id="memberIdDisplay">KZS-000000</div>
-      <p style="margin-top:16px;">Simpan ID anggota di atas sebagai referensi kamu.</p>
+      <br/>
+      <a id="waBtn" href="#" target="_blank" class="wa-open-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.112 1.523 5.84L.057 23.887a.5.5 0 0 0 .611.611l6.047-1.466A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 0 1-5.003-1.375l-.358-.213-3.724.903.92-3.635-.233-.374A9.797 9.797 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Konfirmasi via WhatsApp
+      </a>
+      <p style="margin-top:16px;font-size:11px;">Simpan ID anggota kamu sebagai referensi.</p>
     </div>
   </div>
 </section>
@@ -265,94 +295,157 @@
 </div>
 
 <script>
+  // ── NOMOR WA ADMIN ──────────────────────────────────────────────────────────
+  const ADMIN_WA = '6282164331784';
+
+  // ── SECURITY ────────────────────────────────────────────────────────────────
   function sanitize(str) {
     if (!str) return '';
-    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;').replace(/\//g,'&#x2F;');
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+              .replace(/"/g,'&quot;').replace(/'/g,'&#x27;');
   }
+
   const rateLimiter = (() => {
     const attempts = [], MAX = 5, WINDOW = 60000;
-    return { check() { const now = Date.now(), recent = attempts.filter(t => now - t < WINDOW); if (recent.length >= MAX) return false; attempts.push(now); return true; } };
+    return { check() { const now = Date.now(), r = attempts.filter(t=>now-t<WINDOW); if(r.length>=MAX) return false; attempts.push(now); return true; } };
   })();
-  const csrfToken = (() => { const a = new Uint8Array(16); crypto.getRandomValues(a); return Array.from(a).map(b => b.toString(16).padStart(2,'0')).join(''); })();
-  const PATTERNS = { nickname: /^[a-zA-Z0-9\u00C0-\u024F\u1E00-\u1EFF' -]{2,30}$/, phone: /^8[1-9][0-9]{6,11}$/ };
-  let state = { googleConnected: false, googleEmail: '', submitted: false };
 
-  function scrollToRegister() { document.getElementById('register').scrollIntoView({ behavior: 'smooth' }); }
+  const PATTERNS = {
+    nickname: /^[a-zA-Z0-9\u00C0-\u024F' -]{2,30}$/,
+    phone: /^8[1-9][0-9]{6,11}$/
+  };
 
+  let state = { googleConnected: false, googleEmail: '', submitted: false, waUrl: '' };
+
+  // ── GOOGLE (SIMULASI - ganti dengan OAuth asli jika punya Client ID) ────────
   function connectGoogle() {
     if (state.googleConnected) return;
     const btn = document.getElementById('googleBtn');
-    btn.style.opacity = '0.6'; btn.style.pointerEvents = 'none';
+    btn.style.opacity = '0.6';
+    btn.style.pointerEvents = 'none';
     document.getElementById('googleBtnText').textContent = 'Menghubungkan...';
+
+    // Untuk Google Login ASLI, ganti bagian ini dengan Google OAuth
+    // Saat ini: simulasi untuk demo
     setTimeout(() => {
-      const mockUser = { email: 'anggota@gmail.com', name: 'Anggota KZS' };
+      const email = prompt('Masukkan email Google kamu:') || 'anggota@gmail.com';
       state.googleConnected = true;
-      state.googleEmail = sanitize(mockUser.email);
-      btn.classList.add('connected'); btn.style.opacity = '1'; btn.style.pointerEvents = 'none';
+      state.googleEmail = sanitize(email.trim());
+      btn.classList.add('connected');
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'none';
       document.getElementById('googleBtnText').innerHTML = '✓ &nbsp;' + state.googleEmail;
-      const emailField = document.getElementById('emailField');
-      emailField.value = state.googleEmail;
+      document.getElementById('emailField').value = state.googleEmail;
       document.getElementById('emailDisplay').style.display = 'block';
       showToast('Akun Google berhasil terhubung!', 'success');
-    }, 1500);
+    }, 1000);
   }
 
+  // ── VALIDATORS ───────────────────────────────────────────────────────────────
   function validateNickname(input) {
     const val = input.value.trim(), err = document.getElementById('nicknameErr');
-    if (!val || !PATTERNS.nickname.test(val)) { input.classList.remove('valid'); input.classList.add('invalid'); err.classList.add('show'); return false; }
+    if (!val || !PATTERNS.nickname.test(val)) {
+      input.classList.remove('valid'); input.classList.add('invalid'); err.classList.add('show'); return false;
+    }
     input.classList.remove('invalid'); input.classList.add('valid'); err.classList.remove('show'); return true;
   }
 
   function validatePhone(input) {
-    input.value = input.value.replace(/\D/g, '');
+    input.value = input.value.replace(/\D/g,'');
     const val = input.value.trim(), err = document.getElementById('phoneErr');
-    if (!PATTERNS.phone.test(val)) { input.classList.remove('valid'); input.classList.add('invalid'); err.classList.add('show'); return false; }
+    if (!PATTERNS.phone.test(val)) {
+      input.classList.remove('valid'); input.classList.add('invalid'); err.classList.add('show'); return false;
+    }
     input.classList.remove('invalid'); input.classList.add('valid'); err.classList.remove('show'); return true;
   }
 
-  function generateMemberId() { const a = new Uint32Array(1); crypto.getRandomValues(a); return 'KZS-' + ((a[0] % 900000) + 100000); }
+  // ── GENERATE MEMBER ID ────────────────────────────────────────────────────
+  function generateMemberId() {
+    const a = new Uint32Array(1);
+    crypto.getRandomValues(a);
+    return 'KZS-' + ((a[0] % 900000) + 100000);
+  }
 
+  // ── BUAT PESAN WA ─────────────────────────────────────────────────────────
+  function buildWaUrl(nickname, phone, email, memberId) {
+    const pesan =
+      `Halo Admin KZS Trading Bangka! 👋\n\n` +
+      `Saya baru saja mendaftar sebagai anggota baru.\n\n` +
+      `📋 *DATA PENDAFTARAN*\n` +
+      `👤 Nama Panggilan : ${nickname}\n` +
+      `📞 Nomor HP       : +62${phone}\n` +
+      `📧 Email Google   : ${email}\n` +
+      `🆔 ID Member      : ${memberId}\n` +
+      `📅 Tanggal Daftar : ${new Date().toLocaleDateString('id-ID', {day:'2-digit',month:'long',year:'numeric'})}\n\n` +
+      `Mohon konfirmasi keanggotaan saya. Terima kasih! 🙏`;
+    return `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`;
+  }
+
+  // ── SUBMIT ────────────────────────────────────────────────────────────────
   function handleSubmit() {
     if (state.submitted) return;
     if (!rateLimiter.check()) { showToast('Terlalu banyak percobaan. Tunggu sebentar.', 'error'); return; }
+
     const nicknameOk = validateNickname(document.getElementById('nickname'));
     const phoneOk = validatePhone(document.getElementById('phone'));
+
     if (!state.googleConnected) { showToast('Hubungkan akun Google terlebih dahulu.', 'error'); return; }
     if (!nicknameOk || !phoneOk) { showToast('Periksa kembali data yang kamu isi.', 'error'); return; }
-    const payload = { csrf: csrfToken, timestamp: new Date().toISOString(), google_email: state.googleEmail, nickname: sanitize(document.getElementById('nickname').value.trim()), phone: '+62' + document.getElementById('phone').value.trim(), member_id: generateMemberId() };
+
+    const nickname = sanitize(document.getElementById('nickname').value.trim());
+    const phone = document.getElementById('phone').value.trim();
+    const memberId = generateMemberId();
+
     const btn = document.getElementById('submitBtn');
-    btn.textContent = 'Mendaftarkan...'; btn.disabled = true;
+    btn.textContent = 'Memproses...';
+    btn.disabled = true;
+
     setTimeout(() => {
       state.submitted = true;
-      document.getElementById('memberIdDisplay').textContent = payload.member_id;
+      const waUrl = buildWaUrl(nickname, phone, state.googleEmail, memberId);
+      state.waUrl = waUrl;
+
+      // Tampilkan success
+      document.getElementById('successName').textContent = nickname;
+      document.getElementById('memberIdDisplay').textContent = memberId;
+      document.getElementById('waBtn').href = waUrl;
       document.getElementById('formState').style.display = 'none';
       document.getElementById('successPanel').classList.add('show');
-      showToast('Pendaftaran berhasil! 🎉', 'success');
-    }, 2000);
+
+      showToast('Pendaftaran berhasil! Silakan konfirmasi via WA. 🎉', 'success');
+
+      // Auto buka WA setelah 1.5 detik
+      setTimeout(() => { window.open(waUrl, '_blank'); }, 1500);
+    }, 1500);
   }
 
+  // ── TOAST ─────────────────────────────────────────────────────────────────
   let toastTimer;
-  function showToast(msg, type = 'info') {
+  function showToast(msg, type='info') {
     const t = document.getElementById('toast');
     t.textContent = msg; t.className = 'toast ' + type;
     clearTimeout(toastTimer);
     setTimeout(() => t.classList.add('show'), 10);
-    toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 4000);
   }
 
+  // ── TERMS ─────────────────────────────────────────────────────────────────
   function showTerms() { document.getElementById('termsModal').classList.add('open'); }
   function closeTerms() { document.getElementById('termsModal').classList.remove('open'); }
-  document.getElementById('termsModal').addEventListener('click', function(e) { if (e.target === this) closeTerms(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTerms(); });
+  document.getElementById('termsModal').addEventListener('click', function(e) { if(e.target===this) closeTerms(); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeTerms(); });
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } });
-  }, { threshold: 0.1 });
+  // ── SCROLL REVEAL ─────────────────────────────────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
+  }, {threshold:0.1});
   document.querySelectorAll('.feat-card').forEach(card => {
-    card.style.opacity = '0'; card.style.transform = 'translateY(24px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    card.style.opacity='0'; card.style.transform='translateY(24px)';
+    card.style.transition='opacity 0.6s ease, transform 0.6s ease';
     observer.observe(card);
   });
 </script>
 </body>
 </html>
+
+ 
